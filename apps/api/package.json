@@ -2,6 +2,7 @@
   "name": "@omnigrc/api",
   "version": "1.0.0",
   "scripts": {
+    "predev": "nest build",
     "dev": "nest start --watch",
     "build": "nest build",
     "start": "nest start",
