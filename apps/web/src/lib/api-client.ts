@@ -13,15 +13,24 @@ export async function fetchApi<T = any>(endpoint: string, options: RequestInit =
     headers.set('Content-Type', 'application/json');
   }
 
-  const res = await fetch(`${API_BASE_URL}${endpoint}`, {
-    ...options,
-    headers,
-  });
+  try {
+    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+      ...options,
+      headers,
+    });
 
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`API Error [${res.status}]: ${errText}`);
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      throw new Error(`API Error [${res.status}]: ${errText}`);
+    }
+
+    return res.json();
+  } catch (err: any) {
+    // If fetching fails during SSR on Vercel Serverless Functions, return empty fallback to prevent FUNCTION_INVOCATION_FAILED 500 crash
+    if (typeof window === 'undefined') {
+      console.warn(`[Vercel SSR Graceful Fallback] ${endpoint}: ${err.message}`);
+      return [] as unknown as T;
+    }
+    throw err;
   }
-
-  return res.json();
 }
