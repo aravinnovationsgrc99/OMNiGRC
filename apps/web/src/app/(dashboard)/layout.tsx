@@ -21,10 +21,10 @@ import {
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { label: 'Dashboard', href: '/', icon: LayoutDashboard },
   { label: 'Risk Intelligence', href: '/risks', icon: ShieldAlert },
   { label: 'Assets & Vendors', href: '/assets', icon: Server },
-  { label: 'Requirements / Frameworks', href: '/frameworks-app', icon: FileCheck2 },
+  { label: 'Requirements / Frameworks', href: '/frameworks', icon: FileCheck2 },
   { label: 'Control Intelligence', href: '/controls', icon: SlidersHorizontal },
   { label: 'Compliance Board', href: '/compliance', icon: KanbanSquare },
   { label: 'Evidence & Audit', href: '/evidence', icon: FileText },
